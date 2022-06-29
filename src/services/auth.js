@@ -32,7 +32,20 @@ export const getUser = async () => {
     });
 
     return res.json();
-  } catch (error) {
+  } catch (e) {
+    console.log(e.message);
     return null;
   }
+};
+
+export const signOut = async () => {
+  try {
+    await fetch(`http://localhost:7890/api/v1/users/sessions`),
+      {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        mode: 'cors',
+      };
+  } catch (e) {}
 };

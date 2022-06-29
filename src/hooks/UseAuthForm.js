@@ -19,8 +19,19 @@ function UseAuthForm() {
       setErrorMessage(e.message);
     }
   };
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signUp({ email, password });
 
-  return { email, password, handleSubmit };
+      const url = location.state?.from ? location.state.from.pathname : '/';
+      history.replace(url);
+    } catch (e) {
+      setErrorMessage(e.message);
+    }
+  };
+
+  return { email, password, handleSubmit, handleSignUpSubmit };
 }
 
 export default UseAuthForm;
