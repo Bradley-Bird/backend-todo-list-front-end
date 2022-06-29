@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
 const useAuthContext = () => {
   const data = useContext(AuthContext);
   if (data === undefined) {
-    throw new Error('Auth Context must be in a provider ');
+    throw new Error('Auth Context must be wrapped in a provider ');
   }
   return data;
 };

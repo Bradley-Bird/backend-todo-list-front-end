@@ -1,5 +1,5 @@
 export const signUp = async ({ email, password }) => {
-  const resp = await fetch(`http://localhost:7890/api/v1/users`, {
+  const resp = await fetch(`${process.env.API_URL}/api/v1/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -13,7 +13,7 @@ export const signUp = async ({ email, password }) => {
 };
 
 export const signIn = async ({ email, password }) => {
-  const resp = await fetch(`http://localhost:7890/api/v1/users/sessions`, {
+  const resp = await fetch(`${process.env.API_URL}/api/v1/users/sessions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
@@ -27,7 +27,7 @@ export const signIn = async ({ email, password }) => {
 
 export const getUser = async () => {
   try {
-    const res = await fetch(`http://localhost:7890/api/v1/users/me`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/users/me`, {
       credentials: 'include',
     });
 
