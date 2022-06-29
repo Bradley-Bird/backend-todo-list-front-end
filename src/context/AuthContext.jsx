@@ -1,8 +1,11 @@
 import { createContext, useContext, useState } from 'react';
+import { getUser } from '../services/auth';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const user = getUser();
+  const [currentUser, setcurrentUser] = useState(user || { email: null });
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,6 +18,8 @@ const AuthProvider = ({ children }) => {
         setPassword,
         errorMessage,
         setErrorMessage,
+        currentUser,
+        setcurrentUser,
       }}
     >
       {children}
