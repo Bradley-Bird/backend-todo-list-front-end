@@ -2,8 +2,15 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   Container,
   CssBaseline,
+  Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   TextField,
   Typography,
 } from '@mui/material';
@@ -13,9 +20,11 @@ import { useHistory } from 'react-router-dom';
 import { getUser, signOut } from '../services/auth';
 import { useTodoContext } from '../context/TodoContext';
 import UseTodoForm from '../hooks/UseTodoForm';
+import UseTodoList from '../hooks/UseTodoList';
 function Main() {
-  const { setTodo, errorMessage } = useTodoContext();
+  const { setTodo, errorMessage, loading, checked } = useTodoContext();
   const { todo, handleSubmit } = UseTodoForm();
+  const { list, handleChange, reloadList } = UseTodoList();
   const history = useHistory();
   const [user, setUser] = useState('');
   const handleClick = async () => {
@@ -73,6 +82,7 @@ function Main() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={reloadList}
             >
               {' '}
               Lets get it done!
@@ -82,6 +92,31 @@ function Main() {
             </Typography>
           </Box>
         </Box>
+      </Container>
+      <Container component="section" maxWidth="lg">
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Todo</TableCell>
+              <TableCell>Done</TableCell>
+              <TableCell>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {list.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.todo}</TableCell>
+                <TableCell>
+                  <Checkbox
+                    checked={item.done}
+                    onChange={(e) => handleChange(e, item.id)}
+                  />
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Container>
     </>
   );

@@ -5,10 +5,24 @@ const TodoContext = createContext();
 const TodoProvider = ({ children }) => {
   const [todo, setTodo] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <TodoContext.Provider
-      value={{ todo, setTodo, errorMessage, setErrorMessage }}
+      value={{
+        todo,
+        setTodo,
+        errorMessage,
+        setErrorMessage,
+        list,
+        setList,
+        loading,
+        setLoading,
+        checked,
+        setChecked,
+      }}
     >
       {children}
     </TodoContext.Provider>
