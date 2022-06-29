@@ -30,3 +30,12 @@ export const updateTodoStatusById = async (id, attrs) => {
   });
   return resp.json();
 };
+export const deleteById = async (id) => {
+  const resp = await fetch(`${process.env.API_URL}/api/v1/todo/${id}`, {
+    method: 'delete',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    mode: 'cors',
+  });
+  return resp.json();
+};

@@ -1,10 +1,21 @@
 import React, { useEffect } from 'react';
 import { useTodoContext } from '../context/TodoContext';
-import { getTodoList, updateTodoStatusById } from '../services/todo';
+import {
+  deleteById,
+  getTodoList,
+  updateTodoStatusById,
+} from '../services/todo';
 
 function UseTodoList() {
-  const { list, setList, setErrorMessage, setLoading, checked, setChecked } =
-    useTodoContext();
+  const {
+    list,
+    setList,
+    setErrorMessage,
+    setLoading,
+    checked,
+    setChecked,
+    setTodo,
+  } = useTodoContext();
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
@@ -29,7 +40,11 @@ function UseTodoList() {
     await updateTodoStatusById(id, { done: checked });
     await reloadList();
   };
-  return { list, handleChange, reloadList };
+  const handleDelete = async (id) => {
+    await deleteById(id);
+    await reloadList();
+  };
+  return { list, handleChange, reloadList, handleDelete };
 }
 
 export default UseTodoList;

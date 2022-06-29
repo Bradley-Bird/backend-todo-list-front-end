@@ -24,7 +24,7 @@ import UseTodoList from '../hooks/UseTodoList';
 function Main() {
   const { setTodo, errorMessage, loading, checked } = useTodoContext();
   const { todo, handleSubmit } = UseTodoForm();
-  const { list, handleChange, reloadList } = UseTodoList();
+  const { list, handleChange, reloadList, handleDelete } = UseTodoList();
   const history = useHistory();
   const [user, setUser] = useState('');
   const handleClick = async () => {
@@ -112,7 +112,16 @@ function Main() {
                     onChange={(e) => handleChange(e, item.id)}
                   />
                 </TableCell>
-                <TableCell></TableCell>
+                <TableCell>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
